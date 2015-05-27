@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Spider Task 2WO</string>
+    <string-array name="colors">
+        <item>BLUE</item>
+        <item>BLACK</item>
+        <item>GREEN</item>
+        <item>YELLOW</item>
+        <item>RED</item>
+        <item>WHITE</item>
+        <item>PINK</item>
+        <item>CYAN</item>
+    </string-array>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_text">GO</string>
+    <string name="bold_text">BOLD</string>
+    <string name="italics_text">ITALICS</string>
+    <string name="title_activity_textdisplayactivity">Displaying Text</string>
+</resources>
