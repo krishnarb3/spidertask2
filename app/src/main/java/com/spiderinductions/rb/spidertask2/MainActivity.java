@@ -12,18 +12,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Adapter;
 
+import java.util.ArrayList;
+
 public class MainActivity extends ActionBarActivity {
     TextView textView;
-    Button button;
     String text;
-    int color;
+    int color,fontsize,fontface1;
     EditText editText;
-    Spinner spinner1;
+    Spinner spinner1,spinner2;
     boolean boldcount,italicscount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +39,10 @@ public class MainActivity extends ActionBarActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.colors,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
-        button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text = editText.getText().toString();
-                Intent i = new Intent(MainActivity.this,textdisplayactivity.class);
-                i.putExtra("edittext",text);
-                i.putExtra("boldcount",boldcount);
-                i.putExtra("italicscount",italicscount);
-                i.putExtra("color",color);
-                startActivity(i);
-            }
-        });
+        spinner2 = (Spinner)findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.fontsize,android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -70,6 +64,52 @@ public class MainActivity extends ActionBarActivity {
             public void onNothingSelected(AdapterView<?> parent)
             {
                 color=5;
+            }
+        });
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                switch(position)
+                {
+                    case 0: fontsize=20;break;
+                    case 1: fontsize=24;break;
+                    case 2: fontsize=28;break;
+                    case 3: fontsize=32;break;
+                    case 4: fontsize=36;break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+                color=5;
+            }
+        });
+
+        final String[] fontface = getResources().getStringArray(R.array.fontface);
+        ListAdapter adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,fontface);
+        ListView listview = (ListView)findViewById(R.id.listViewfontface);
+        listview.setAdapter(adapter3);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                switch(position)
+                {
+                    case 0:fontface1=0;break;
+                    case 1:fontface1=1;break;
+                    case 2:fontface1=2;break;
+                }
+                Intent i = new Intent(MainActivity.this,textdisplayactivity.class);
+                text = editText.getText().toString();
+                i.putExtra("fontface1",fontface1);
+                i.putExtra("text",text);
+                i.putExtra("boldcount",boldcount);
+                i.putExtra("italicscount",italicscount);
+                i.putExtra("color",color);
+                i.putExtra("fontsize",fontsize);
+                startActivityForResult(i,1);
             }
         });
     }
@@ -99,6 +139,17 @@ public class MainActivity extends ActionBarActivity {
         }
     });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1)
+        {
+        finish();
+        System.exit(0);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

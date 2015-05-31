@@ -20,9 +20,14 @@
             android:name=".textdisplayactivity"
             android:label="@string/title_activity_textdisplayactivity"
             android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.spiderinductions.rb.spidertask2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".fontfacelistactivity"
+            android:label="@string/title_activity_fontfacelistactivity">
+        </activity>
+        <activity
+            android:name=".textdisplayactivity2"
+            android:label="@string/title_activity_textdisplayactivity2">
         </activity>
     </application>
 

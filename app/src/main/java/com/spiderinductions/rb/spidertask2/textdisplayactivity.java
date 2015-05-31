@@ -1,18 +1,23 @@
 package com.spiderinductions.rb.spidertask2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 public class textdisplayactivity extends ActionBarActivity {
+    Typeface t;
     TextView textView;
     String text2;
-    int color;
+    int color,fontface,fontsize;
+    Button button_exit,button_sendback;
     private boolean boldcount,italicscount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,20 +25,46 @@ public class textdisplayactivity extends ActionBarActivity {
         setContentView(R.layout.activity_textdisplayactivity);
         textView = (TextView)findViewById(R.id.textview);
         Bundle bundle = getIntent().getExtras();
-        text2 = bundle.getString("edittext");
+        text2 = bundle.getString("text");
+        textView.setText(text2);
         boldcount = bundle.getBoolean("boldcount");
         color = bundle.getInt("color");
         italicscount = bundle.getBoolean("italicscount");
-        textView.setText(text2);
-        if(boldcount)
-            textView.setTypeface(null,Typeface.BOLD);
-        else
-            textView.setTypeface(Typeface.DEFAULT);
-
-        if(italicscount)
-            textView.setTypeface(null,Typeface.ITALIC);
-        else
-            textView.setTypeface(Typeface.DEFAULT);
+        fontface = bundle.getInt("fontface1");
+        fontsize = bundle.getInt("fontsize");
+        switch(fontface)
+        {
+            case 0:
+                t = Typeface.MONOSPACE;
+                textView.setTypeface(t);
+                if(boldcount)
+                    textView.setTypeface(Typeface.MONOSPACE,1);
+                if(italicscount)
+                    textView.setTypeface(Typeface.MONOSPACE,2);
+                if((boldcount)&&(italicscount))
+                    textView.setTypeface(Typeface.MONOSPACE,3);
+                break;
+            case 1:
+                t = Typeface.SANS_SERIF;
+                textView.setTypeface(t);
+                if(boldcount)
+                    textView.setTypeface(Typeface.SANS_SERIF,1);
+                if(italicscount)
+                    textView.setTypeface(Typeface.SANS_SERIF,2);
+                if((boldcount)&&(italicscount))
+                    textView.setTypeface(Typeface.SANS_SERIF,3);
+                break;
+            case 2:
+                t = Typeface.SERIF;
+                textView.setTypeface(t);
+                if(boldcount)
+                    textView.setTypeface(Typeface.SERIF,1);
+                if(italicscount)
+                    textView.setTypeface(Typeface.SERIF,2);
+                if((boldcount)&&(italicscount))
+                    textView.setTypeface(Typeface.SERIF,3);
+                break;
+        }
         switch(color)
         {
             case 0: textView.setTextColor(Color.BLUE);break;
@@ -45,7 +76,33 @@ public class textdisplayactivity extends ActionBarActivity {
             case 6: textView.setTextColor(Color.parseColor("#ff69b4"));break;
             case 7: textView.setTextColor(Color.CYAN);break;
         }
+        switch (fontsize)
+        {
+            case 20: textView.setTextSize(20);break;
+            case 24: textView.setTextSize(24);break;
+            case 28: textView.setTextSize(28);break;
+            case 32: textView.setTextSize(32);break;
+            case 36: textView.setTextSize(36);break;
+        }
 
+        button_sendback = (Button)findViewById(R.id.button_sendback);
+        button_sendback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(0,intent);
+                finish();
+            }
+        });
+        button_exit = (Button)findViewById(R.id.button_exit);
+        button_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(1,intent);
+                finish();
+            }
+        });
     }
 
 

@@ -10,10 +10,27 @@
         <item>PINK</item>
         <item>CYAN</item>
     </string-array>
+    <string-array name="fontface">
+        <item>MONOSPACE</item>
+        <item>SANS_SERIF</item>
+        <item>SERIF</item>
+    </string-array>
+    <string-array name="fontsize">
+        <item>20</item>
+        <item>24</item>
+        <item>28</item>
+        <item>32</item>
+        <item>36</item>
+    </string-array>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="button_text">GO</string>
     <string name="bold_text">BOLD</string>
     <string name="italics_text">ITALICS</string>
     <string name="title_activity_textdisplayactivity">Displaying Text</string>
+    <string name="text_exit">EXIT</string>
+    <string name="title_activity_fontfacelistactivity">Change Font Style</string>
+    <string name="title_activity_textdisplayactivity2">Displaying Text</string>
+    <string name="text_changefontface">Change Font Face</string>
+    <string name="edit_the_text">Edit the Text</string>
 </resources>
